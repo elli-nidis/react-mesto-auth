@@ -1,0 +1,13 @@
+.card__caption {
+  width: 100%;
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: 189px 22px;
+  grid-template-rows: 80px;
+  column-gap: 30px;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #fff;
+  padding: 0 20px 0 21px;
+}
