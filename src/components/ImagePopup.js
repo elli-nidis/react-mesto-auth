@@ -15,4 +15,4 @@ function ImagePopup({card, isOpen, onClose}) {
   );
 }
 
-export {ImagePopup}
+export {ImagePopup};

@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import { api } from "../utils/api";
 import { Header } from "./Header";
 import { Main } from "./Main";
@@ -9,6 +10,8 @@ import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
 import { AddPlacePopup } from "./AddPlacePopup";
 import {DeletePlacePopup} from "./DeletePlacePopup";
+import { Login } from "./Login";
+import { Register } from "./Register";
 
 function App() {
 
@@ -122,7 +125,12 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
 
-      <Main 
+      <Routes>
+        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-up" element={<Register />} />
+      </ Routes>
+
+      {/* <Main 
         onEditProfile={handleEditProfileClick}
         onAddPlace ={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
@@ -130,11 +138,11 @@ function App() {
         onCardClick={handleCardClick}
         onCardLike={handleCardLike}
         onCardDelete={handleCardDeleteClick}
-      />
+      /> */}
 
       <Footer />
 
-      <EditProfilePopup 
+      {/* <EditProfilePopup 
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
@@ -167,7 +175,7 @@ function App() {
         isOpen={isImagePopupOpen} 
         card={selectedCard}
         onClose={closeAllPopups}
-      />
+      /> */}
 
     </ CurrentUserContext.Provider>
   );
