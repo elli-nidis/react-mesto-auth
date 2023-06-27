@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { api } from "../utils/api";
 import { Header } from "./Header";
 import { Main } from "./Main";
@@ -12,6 +12,7 @@ import { AddPlacePopup } from "./AddPlacePopup";
 import {DeletePlacePopup} from "./DeletePlacePopup";
 import { Login } from "./Login";
 import { Register } from "./Register";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
   const [currentUser, setCurrentUser ] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
@@ -126,8 +128,32 @@ function App() {
       <Header />
 
       <Routes>
+        <Route path="/" element={
+          <ProtectedRoute
+            element={Main}
+            isLoggedIn={loggedIn}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace ={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            cards={cards}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDeleteClick}
+          />}
+        />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
+        {/* <Route path="/main" element={
+          <Main
+            onEditProfile={handleEditProfileClick}
+            onAddPlace ={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            cards={cards}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDeleteClick}
+          />} 
+        /> */}
       </ Routes>
 
       {/* <Main 
@@ -142,7 +168,7 @@ function App() {
 
       <Footer />
 
-      {/* <EditProfilePopup 
+      <EditProfilePopup 
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
@@ -175,7 +201,7 @@ function App() {
         isOpen={isImagePopupOpen} 
         card={selectedCard}
         onClose={closeAllPopups}
-      /> */}
+      />
 
     </ CurrentUserContext.Provider>
   );

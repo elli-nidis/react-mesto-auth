@@ -8,8 +8,8 @@ function Register() {
     title="Регистрация"
     buttonName="Зарегистрироваться"
     children={
-      <p>Уже зарегистрированы? 
-        <Link to="/sign-in">Войти</Link>
+      <p className="sign__text">Уже зарегистрированы? 
+        <Link to="/sign-in" className="sign__link"> Войти</Link>
       </p>
     }
     />
