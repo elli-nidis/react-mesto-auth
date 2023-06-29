@@ -172,7 +172,7 @@ function App() {
         onCardDelete={handleCardDeleteClick}
       /> */}
 
-      <Footer />
+      {loggedIn && <Footer />}
 
       <EditProfilePopup 
         isOpen={isEditProfilePopupOpen}
