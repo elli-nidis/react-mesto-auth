@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import { api } from "../utils/api";
 import { Header } from "./Header";
 import { Main } from "./Main";
@@ -9,7 +9,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
 import { AddPlacePopup } from "./AddPlacePopup";
-import {DeletePlacePopup} from "./DeletePlacePopup";
+import { DeletePlacePopup } from "./DeletePlacePopup";
 import { Login } from "./Login";
 import { Register } from "./Register";
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -63,6 +63,10 @@ function App() {
 
   function handleLogin() {
     setLoggedIn(true);
+  }
+
+  function handleLogOut() {
+    setLoggedIn(false);
   }
 
   
@@ -131,7 +135,10 @@ function App() {
     
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header />
+      <Header 
+        isLoggedIn={loggedIn}
+        handleLogOut={handleLogOut}
+      />
 
       <Routes>
         <Route path="/" element={
@@ -149,6 +156,7 @@ function App() {
         />
         <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
         <Route path="/sign-up" element={<Register />} />
+        <Route path="*" element={<Login handleLogin={handleLogin} />} />
         {/* <Route path="/main" element={
           <Main
             onEditProfile={handleEditProfileClick}
