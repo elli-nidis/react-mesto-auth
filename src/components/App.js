@@ -13,6 +13,7 @@ import {DeletePlacePopup} from "./DeletePlacePopup";
 import { Login } from "./Login";
 import { Register } from "./Register";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { InfoTooltip } from "./InfoTooltip";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setDeletePlacePopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser ] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -57,6 +59,10 @@ function App() {
     setImagePopupOpen(false);
     setDeletePlacePopupOpen(false);
     setSelectedCard(null);
+  }
+
+  function handleLogin() {
+    setLoggedIn(true);
   }
 
   
@@ -141,7 +147,7 @@ function App() {
             onCardDelete={handleCardDeleteClick}
           />}
         />
-        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
         <Route path="/sign-up" element={<Register />} />
         {/* <Route path="/main" element={
           <Main
@@ -200,6 +206,11 @@ function App() {
       <ImagePopup
         isOpen={isImagePopupOpen} 
         card={selectedCard}
+        onClose={closeAllPopups}
+      />
+
+      <InfoTooltip
+        isOpen={isInfoTooltipOpen}
         onClose={closeAllPopups}
       />
 
