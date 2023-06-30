@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as auth from '../utils/auth';
+// import successImg from '../images/success.svg';
 
-function Register() {
+function Register({onRegister}) {
 
   const navigate = useNavigate();
 
@@ -24,7 +25,13 @@ function Register() {
     e.preventDefault();
     const {email, password} = formValue;
     auth.register(email, password)
-      .then(res => {navigate('/sign-in', {replace: true})})
+      .then(res => {
+        if(res) {
+          onRegister({imgLink: 'success', text: 'Вы успешно зарегистрировались!', name: 'Успешная регистрация'});
+          navigate('/sign-in', {replace: true});
+        }
+        else onRegister({imgLink: 'failure', text: 'Что-то пошло не так! Попробуйте ещё раз.', name: 'Неудачная регистрация'});
+      });  
   };
 
   return (

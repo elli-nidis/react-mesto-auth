@@ -10,6 +10,8 @@
 @import url(./blocks/menu/menu.css);
 @import url(./blocks/menu/__link/menu__link.css);
 @import url(./blocks/menu/__link/_hidden/menu__link_hidden.css);
+@import url(./blocks/menu/__link/_type/menu__link_type_dark.css);
+@import url(./blocks/menu/__link/_type/menu__link_type_large.css);
 
 @import url(./blocks/content/content.css);
 

@@ -26,6 +26,7 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [isDeletePlacePopupOpen, setDeletePlacePopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
+  const [infoTooltipParams, setInfoTooltipParams] = React.useState({});
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser ] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -55,6 +56,11 @@ function App() {
     setSelectedCard(card);
   }
 
+  function handleRegistrationClick({imgLink, text, name}) {
+    setInfoTooltipOpen(true);
+    setInfoTooltipParams({imgLink, text, name})
+  }
+
 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
@@ -62,6 +68,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setImagePopupOpen(false);
     setDeletePlacePopupOpen(false);
+    setInfoTooltipOpen(false);
     setSelectedCard(null);
   }
 
@@ -189,30 +196,9 @@ function App() {
           />}
         />
         <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/sign-up" element={<Register />} />
+        <Route path="/sign-up" element={<Register onRegister={handleRegistrationClick}/>} />
         <Route path="*" element={<Login handleLogin={handleLogin} />} />
-        {/* <Route path="/main" element={
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace ={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            cards={cards}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDeleteClick}
-          />} 
-        /> */}
-      </ Routes>
-
-      {/* <Main 
-        onEditProfile={handleEditProfileClick}
-        onAddPlace ={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        cards={cards}
-        onCardClick={handleCardClick}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDeleteClick}
-      /> */}
+      </ Routes>  
 
       {loggedIn && <Footer />}
 
@@ -252,6 +238,7 @@ function App() {
       />
 
       <InfoTooltip
+        infoTooltipParams={infoTooltipParams}
         isOpen={isInfoTooltipOpen}
         onClose={closeAllPopups}
       />

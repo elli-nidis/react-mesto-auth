@@ -12,12 +12,12 @@ function NavBar({isLoggedIn, handleLogOut, email}) {
   }
 
   return (
-    <nav className="menu">
-      <ul>
+    <nav>
+      <ul className="menu">
         {isLoggedIn ?
           (<>
-            <li className="menu__link">{email}</li>
-            <li className="menu__link"><Link to="/sign-in" className="sign__link" onClick={logOut} >Выйти</Link></li>
+            <li className="menu__link menu__link_type_large">{email}</li>
+            <li className="menu__link"><Link to="/sign-in" className="menu__link menu__link_type_dark" onClick={logOut} >Выйти</Link></li>
           </>)
         : (<>
             <li><NavLink to="/sign-up" className={({isActive}) => `menu__link ${isActive ? "menu__link_hidden" : ""}`}>Регистрация</NavLink></li>
