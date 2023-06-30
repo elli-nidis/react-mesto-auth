@@ -27,8 +27,13 @@ function Login({handleLogin}) {
     auth.authorize(email, password)
       .then(res => {
         if(res.token) {
-          setFormValue({email: '', password: ''});
-          handleLogin();
+          // setFormValue({email: '', password: ''});
+          localStorage.setItem('token', res.token);
+          handleLogin(email);
+          setFormValue({
+            email: '',
+            password: ''
+          });
           navigate('/', {replace: true});
         }
       })

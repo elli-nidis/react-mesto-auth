@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import { api } from "../utils/api";
 import { Header } from "./Header";
 import { Main } from "./Main";
@@ -14,8 +14,11 @@ import { Login } from "./Login";
 import { Register } from "./Register";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { InfoTooltip } from "./InfoTooltip";
+import { getCurrentUser } from "../utils/auth";
 
 function App() {
+
+  const navigate = useNavigate();
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
@@ -28,6 +31,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [currentUserEmail, setCurrentUserEmail] = React.useState('');
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
@@ -61,13 +65,42 @@ function App() {
     setSelectedCard(null);
   }
 
-  function handleLogin() {
+  function handleLogin(currentUserEmail) {
     setLoggedIn(true);
+    setCurrentUserEmail(currentUserEmail);
   }
 
   function handleLogOut() {
     setLoggedIn(false);
+    setCurrentUserEmail('');
   }
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, [])
+
+  function tokenCheck() {
+    if(localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      console.log('tokenCheck');
+
+      if(token) {
+        getCurrentUser(token).then(result => {
+          if (result) {
+            setLoggedIn(true);
+            console.log({result});
+            console.log(result.email);
+            setCurrentUserEmail(result.data.email)
+            navigate("/", {replace: true})
+          }
+        })
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, [])
 
   
   React.useEffect(
@@ -138,6 +171,7 @@ function App() {
       <Header 
         isLoggedIn={loggedIn}
         handleLogOut={handleLogOut}
+        email={currentUserEmail}
       />
 
       <Routes>

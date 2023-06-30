@@ -40,11 +40,23 @@ export const authorize = (email, password) => {
         return (err);
       }
   })
-  .then (res => {
-    localStorage.setItem('token', res.token);
-    return res;
+  // .then (res => {
+  //   localStorage.setItem('token', res.token);
+  //   return res;
+  // })
+  // .catch(e => console.log(e));
+}
+
+export const getCurrentUser = (token) => {
+  return fetch(`${BASE_URL}users/me`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `Bearer ${token}`
+    }
   })
-  .catch(e => console.log(e));
+    .then(res => res.json())
+    .then(data => data)
 }
 
 
