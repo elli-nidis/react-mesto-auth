@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as auth from '../utils/auth';
-// import successImg from '../images/success.svg';
 
 function Register({onRegister}) {
 

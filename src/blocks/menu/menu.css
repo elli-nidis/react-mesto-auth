@@ -1,6 +1,5 @@
 .menu {
   display: flex;
-  column-gap: 24px;
   margin: 0;
   padding-top: 5px;
 }

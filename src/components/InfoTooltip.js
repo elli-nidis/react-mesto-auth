@@ -3,8 +3,7 @@ import successImg from '../images/success.svg';
 import failureImg from '../images/failure.svg';
 
 function InfoTooltip({isOpen, infoTooltipParams, onClose,}) {
-  const i = infoTooltipParams.imgLink;
-  console.log({i});
+
   return (
     <div className={`popup popup_bground_half-dark ${isOpen && 'popup_opened'}`}>
     <div className="popup__container">

@@ -58,7 +58,7 @@ function App() {
 
   function handleRegistrationClick({imgLink, text, name}) {
     setInfoTooltipOpen(true);
-    setInfoTooltipParams({imgLink, text, name})
+    setInfoTooltipParams({imgLink, text, name});
   }
 
 
@@ -95,10 +95,8 @@ function App() {
         getCurrentUser(token).then(result => {
           if (result) {
             setLoggedIn(true);
-            console.log({result});
-            console.log(result.email);
-            setCurrentUserEmail(result.data.email)
-            navigate("/", {replace: true})
+            setCurrentUserEmail(result.data.email);
+            navigate("/", {replace: true});
           }
         })
       }
@@ -107,7 +105,7 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-  }, [])
+  }, []);
 
   
   React.useEffect(

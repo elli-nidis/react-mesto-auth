@@ -40,11 +40,6 @@ export const authorize = (email, password) => {
         return (err);
       }
   })
-  // .then (res => {
-  //   localStorage.setItem('token', res.token);
-  //   return res;
-  // })
-  // .catch(e => console.log(e));
 }
 
 export const getCurrentUser = (token) => {
